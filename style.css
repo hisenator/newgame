@@ -1,0 +1,12 @@
+html, body {
+  margin: 0;
+  padding: 0;
+ /* background-image:('complex_honeycomb');  */
+ background-size: cover;
+}
+
+
+canvas {
+  display: block;
+  margin: 50px auto;
+}
