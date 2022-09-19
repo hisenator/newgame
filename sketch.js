@@ -1,8 +1,8 @@
-'use strict';
+
 
 let state = 'title';
 let cnv;
-let points = 5;
+let points = 20;
 let w = 600;
 let h = 600
 let player;
@@ -22,7 +22,6 @@ function preload (){
   playerImg= loadImage('Assets/dirtysock.png');
   coinsImg= loadImage ('Assets/dollar.png');
   enemiesImg= loadImage ('Assets/bubble.png');
-  titleImg= loadImage ('Assets/bear.png');
   berriesImg= loadImage ('Assets/othersock.png');
   queenImg= loadImage ('Assets/soap.png');
   youLostImg= loadImage ('Assets/dead.png');
@@ -37,7 +36,7 @@ function setup() {
 imageMode(CENTER);
 rectMode (CENTER);
 
-textFont ('blockhead ot');
+textFont ('Futura');
 
 
 player = new Player();
@@ -76,13 +75,13 @@ function draw() {
 }
 
 function keyPressed (){
-  if ( keyCode == LEFT_ARROW){
+  if ( keyCode == 65){
     player.direction = 'left'
-  }else if (keyCode == RIGHT_ARRROW) {
+  }else if (keyCode == 68) {
     player.direction = 'right'
-  }else if (keyCode == UP_ARROW) {
+  }else if (keyCode == 87) {
     player.direction = 'up'
-  }else if (keyCode == DOWN_ARROW) {
+  }else if (keyCode == 83) {
     player.direction = 'down'
   }else if (key = ' '){
     player.direction = 'still'
@@ -92,19 +91,19 @@ function keyPressed (){
 function keyReleased (){
   let numberKeysPressed = 0;
 
-  if (keyIsDown (LEFT_ARROW)){
+  if (keyIsDown (65)){
     numberKeysPressed ++;
   }
 
-  if (keyIsDown (RIGHT_ARROW)){
+  if (keyIsDown (68)){
     numberKeysPressed ++;
   }
 
-  if (keyIsDown (UP_ARROW)){
+  if (keyIsDown (87)){
     numberKeysPressed ++;
   }
 
-  if (keyIsDown (DOWN_ARROW)){
+  if (keyIsDown (67)){
     numberKeysPressed ++;
   }
   console.log(numberKeysPressed);
@@ -114,14 +113,14 @@ function keyReleased (){
 }
 
 function title(){
-  background(248,213,8);
-image (titleImg, w/ 2, h/1);
+  background(300,300,300);
 
-  textSize(135);
-  fill (90,64,27)
+
+  textSize(125);
+  fill (0,0,0)
 noStroke();
   textAlign (CENTER);
-  text('ORRPHEUS', w/2, h/3.5);
+  text('ORPHEUS', w/2, h/3.5);
   textSize (30);
   text ('find your other half', w/2., h/2);
   text ('avoid the enemies, get money', w/2., h/1.7);
@@ -135,18 +134,18 @@ function titleMouseClicked(){
 }
 
 function level1(){
-  background (80, 150,170)
+  background (300,300,300)
 
-  if (random (1) <= 0.01){
+  if (random (1) <= 0.001){
       coins.push(new Coin());
   }
   if (random (1) <= 0.02){
       enemies.push(new Enemy());
   }
-  if (random (1) <= 0.0001){
+  if (random (1) <= 0.000001){
       berries.push(new Boost());
   }
-  if (random (1) <= 0.003){
+  if (random (1) <= 0.0003){
       queen.push(new Bomb());
   }
 
@@ -197,7 +196,7 @@ for (let i= enemies.length -1; i >= 0; i --){
 
 for (let i= berries.length -1; i >= 0; i --){
   if (dist(player.x, player.y, berries[i].x, berries[i].y) <= (player.r + berries[i].r)/2){
-    points= points+ 5;
+    points= points+ 550;
     console.log(points);
     berries.splice(i,1);
 } else if (berries [i].y > h){
@@ -208,7 +207,7 @@ for (let i= berries.length -1; i >= 0; i --){
 
 for (let i= queen.length -1; i >= 0; i --){
   if (dist(player.x, player.y, queen[i].x, queen[i].y) <= (player.r + queen[i].r)/2){
-    points= points-10;
+    points= points-25;
     console.log(points);
     queen.splice(i,1);
 } else if (queen [i].y > h){
@@ -262,5 +261,5 @@ noStroke();
 
 function youLostMouseClicked (){
   state = 'title';
-  points = 5;
+  points = 0;
 }
